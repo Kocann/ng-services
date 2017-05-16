@@ -1,9 +1,9 @@
 (function () {
 
     angular.module('app')
-        .controller('EditBookController', ['$routeParams', 'books', '$cookies', '$cookieStore', "dataService", '$location', "$log",'BooksResource', EditBookController]);
+        .controller('EditBookController', ['$routeParams', 'books', '$cookies', '$cookieStore', "dataService", '$location', "$log",'BooksResource','currentUser', EditBookController]);
 
-    function EditBookController($routeParams, books, $cookies, $cookieStore, dataService, $location, $log, BooksResource) {
+    function EditBookController($routeParams, books, $cookies, $cookieStore, dataService, $location, $log, BooksResource, currentUser) {
 
         var vm = this;
 
@@ -19,7 +19,8 @@
         
         function getBookSuccess(book){
             vm.currentBook = book;
-            $cookieStore.put('lastEdited', vm.currentBook);
+            //$cookieStore.put('lastEdited', vm.currentBook);
+            currentUser.lastBookEdited = vm.currentBook;
 
         }
 

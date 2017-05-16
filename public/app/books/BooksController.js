@@ -1,15 +1,15 @@
 (function() {
 
     angular.module('app')
-        .controller('BooksController', ['$q', 'books', 'dataService', 'badgeService', '$cookies', '$cookieStore', '$log', '$route','BooksResource', BooksController]);
+        .controller('BooksController', ['$q', 'books', 'dataService', 'badgeService', '$cookies', '$cookieStore', '$log', '$route','BooksResource','currentUser', BooksController]);
 
 
-    function BooksController($q, books, dataService, badgeService, $cookies, $cookieStore, $log, $route, BooksResource) {
+    function BooksController($q, books, dataService, badgeService, $cookies, $cookieStore, $log, $route, BooksResource, currentUser) {
 
         var vm = this;
 
         vm.appName = books.appName;
-        
+
         dataService.getUserSummary()
             .then(getUserSummarySuccess);
 
@@ -96,7 +96,7 @@
         vm.favoriteBook = $cookies.favoriteBook;
 
         vm.lastEdited = $cookieStore.get('lastEdited');
-
+        //vm.currentUser = currentUser;
     }
 
 }());
