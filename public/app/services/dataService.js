@@ -16,13 +16,7 @@
         };
 
         function getAllBooks(){
-            return $http({
-                method: 'GET',
-                url: 'api/books',
-                headers: {
-                    'PS-BookLogger-Version': constants.APP_VERSION
-                }
-            })
+            return $http.get('api/books')
             .then(sendResponseData)
             .catch(sendGetBooksError);
         }
@@ -35,12 +29,9 @@
         }
 
         function getBookByID(bookID){
-             return $http({
-                method: 'GET',
-                url: 'api/books/' + bookID
-            })
-            .then(sendResponseData)
-            .catch(sendGetBooksError);
+             return $http.get('api/books/' + bookID)
+                        .then(sendResponseData)
+                        .catch(sendGetBooksError);
         }
         function updateBook(book){
             return $http({
@@ -61,11 +52,7 @@
         }
 
            function addBook(newBook){
-            return $http({
-                method: 'POST',
-                url: 'api/books',
-                data: newBook
-            })
+            return $http.post('api/books', newBook)
             .then(addBookSuccess)
             .catch(addBookError);
         }
