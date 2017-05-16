@@ -9,7 +9,14 @@
         var vm = this;
 
         vm.appName = books.appName;
+        
+        dataService.getUserSummary()
+            .then(getUserSummarySuccess);
 
+        function getUserSummarySuccess(summaryData) {
+            console.log(summaryData);
+            vm.summaryData = summaryData;
+        }
         /*
         The following section of code performs the same function as the larger section
         below, but waits until both promises are resolved before processing the results.
