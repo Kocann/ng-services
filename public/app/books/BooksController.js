@@ -48,7 +48,7 @@
         }
 
         function errorCallback(errorMsg) {
-            //console.log('Error Message: ' + errorMsg);
+            console.log('Error Message: ' + errorMsg);
         }
 
         function getAllBooksComplete() {
