@@ -1,10 +1,10 @@
 (function() {
 
     angular.module('app')
-        .controller('BooksController', ['$q', 'books', 'dataService', 'badgeService', '$cookies', '$cookieStore', '$log', '$route', BooksController]);
+        .controller('BooksController', ['$q', 'books', 'dataService', 'badgeService', '$cookies', '$cookieStore', '$log', '$route','BooksResource', BooksController]);
 
 
-    function BooksController($q, books, dataService, badgeService, $cookies, $cookieStore, $log, $route) {
+    function BooksController($q, books, dataService, badgeService, $cookies, $cookieStore, $log, $route, BooksResource) {
 
         var vm = this;
 
@@ -33,10 +33,12 @@
         }
         */
 
-        dataService.getAllBooks()
-            .then(getBooksSuccess, null, getBooksNotification)
-            .catch(errorCallback)
-            .finally(getAllBooksComplete);
+        // dataService.getAllBooks()
+        //     .then(getBooksSuccess, null, getBooksNotification)
+        //     .catch(errorCallback)
+        //     .finally(getAllBooksComplete);
+
+        vm.allBooks = BooksResource.query();
 
         function getBooksSuccess(books) {
             //throw 'error in success handler';

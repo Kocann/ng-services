@@ -1,9 +1,9 @@
 (function () {
 
     angular.module('app')
-        .controller('EditBookController', ['$routeParams', 'books', '$cookies', '$cookieStore', "dataService", '$location', "$log", EditBookController]);
+        .controller('EditBookController', ['$routeParams', 'books', '$cookies', '$cookieStore', "dataService", '$location', "$log",'BooksResource', EditBookController]);
 
-    function EditBookController($routeParams, books, $cookies, $cookieStore, dataService, $location, $log) {
+    function EditBookController($routeParams, books, $cookies, $cookieStore, dataService, $location, $log, BooksResource) {
 
         var vm = this;
 
@@ -11,9 +11,11 @@
         //     return item.book_id == $routeParams.bookID;
         // })[0]; zamiast tego dać to poniżej:
 
-        dataService.getBookByID($routeParams.bookID)
-                   .then(getBookSuccess)
-                   .catch(getBookError);
+        // dataService.getBookByID($routeParams.bookID)
+        //            .then(getBookSuccess)
+        //            .catch(getBookError);
+
+        vm.currentBook = BooksResource.get({book_id:$routeParams.bookID});
         
         function getBookSuccess(book){
             vm.currentBook = book;
@@ -26,9 +28,13 @@
         }
 
         vm.saveBook = function() {
-            dataService.updateBook(vm.currentBook)
-                .then(updateSuccesBook)
-                .catch(updateErrorBook);
+            // dataService.updateBook(vm.currentBook)
+            //     .then(updateSuccesBook)
+            //     .catch(updateErrorBook);
+
+            vm.currentBook.$update();
+            $location.path('/');
+
         };
 
         function updateSuccesBook(message){
